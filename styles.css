@@ -29,3 +29,16 @@ body {
     display: none;
   }
   
+.game-info {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #reset-btn {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
