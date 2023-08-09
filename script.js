@@ -1,9 +1,11 @@
 const cards = document.querySelectorAll('.card');
 const movesElement = document.getElementById('moves');
+const scoreElement = document.getElementById('score');
 const resetButton = document.getElementById('reset-btn');
 let flippedCards = [];
 let canFlip = true;
 let moves = 0;
+let score = 0;
 
 cards.forEach(card => {
   card.addEventListener('click', () => {
@@ -30,6 +32,8 @@ function checkMatch() {
   if (card1Data === card2Data) {
     flippedCards = [];
     canFlip = true;
+    score += 10;
+    scoreElement.textContent = score;
   } else {
     card1.classList.remove('flipped');
     card2.classList.remove('flipped');
@@ -37,6 +41,9 @@ function checkMatch() {
     card2.querySelector('img').style.display = 'none';
     flippedCards = [];
     canFlip = true;
+    score -= 5;
+    if (score < 0) score = 0;
+    scoreElement.textContent = score;
   }
 }
 
@@ -48,5 +55,7 @@ resetButton.addEventListener('click', () => {
   flippedCards = [];
   canFlip = true;
   moves = 0;
+  score = 0;
   movesElement.textContent = moves;
+  scoreElement.textContent = score;
 });
