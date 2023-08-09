@@ -1,17 +1,22 @@
 const cards = document.querySelectorAll('.card');
+const movesElement = document.getElementById('moves');
+const resetButton = document.getElementById('reset-btn');
 let flippedCards = [];
 let canFlip = true;
+let moves = 0;
 
 cards.forEach(card => {
   card.addEventListener('click', () => {
     if (!canFlip || card.classList.contains('flipped')) return;
-    
+
     card.classList.add('flipped');
     card.querySelector('img').style.display = 'block';
     flippedCards.push(card);
 
     if (flippedCards.length === 2) {
       canFlip = false;
+      moves++;
+      movesElement.textContent = moves;
       setTimeout(() => checkMatch(), 1000);
     }
   });
@@ -34,3 +39,14 @@ function checkMatch() {
     canFlip = true;
   }
 }
+
+resetButton.addEventListener('click', () => {
+  cards.forEach(card => {
+    card.classList.remove('flipped');
+    card.querySelector('img').style.display = 'none';
+  });
+  flippedCards = [];
+  canFlip = true;
+  moves = 0;
+  movesElement.textContent = moves;
+});
